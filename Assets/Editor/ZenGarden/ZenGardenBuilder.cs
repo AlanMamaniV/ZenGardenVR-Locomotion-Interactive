@@ -11,6 +11,7 @@ using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 using TMPro;
 using ZenGarden.Interactions;
 using ZenGarden.Environment;
+using VRExplorer;
 
 namespace ZenGarden.Editor
 {
@@ -167,7 +168,7 @@ namespace ZenGarden.Editor
             ctrl.transform.SetParent(parent, false);
             ctrl.transform.localPosition = new Vector3(isLeft ? -0.2f : 0.2f, -0.1f, 0.3f);
 
-            var interactor = ctrl.AddComponent<NearFarInteractor>();
+            var interactor = ctrl.AddComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>();
             ctrl.AddComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual>();
         }
         #endregion
