@@ -1,189 +1,129 @@
-# VR Explorer: Magical Island
+# Zen Garden VR: Japanese Kyoto Experience (Interactive Edition)
 
-Immersive Virtual Reality interactive experience developed in **Unity 6 (6000.6.8f1)** using **OpenXR**, **Universal Render Pipeline (URP 17.6.0)**, and **XR Interaction Toolkit 3.6.1**.
+Experiencia de Realidad Virtual inmersiva ambientada en un auténtico **Jardín Zen tradicional japonés de Kioto**, desarrollada en **Unity 6 (6000.6.8f1)** utilizando **OpenXR**, **Universal Render Pipeline (URP 17.6.0)** y **XR Interaction Toolkit 3.6.1**.
 
-The player explores a mythical island divided into 4 unique zones, discovers arcane crystals, awakens ancient runestones, interacts with magical relics, and unleashes the latent power of the Great Sanctuary.
+Esta edición expande significativamente el diseño visual, espacial y las mecánicas interactivas del proyecto, combinando elementos arquitectónicos clásicos (Torii, Faroles Tōrō, Shishi-odoshi, Pagoda de Contemplación) con 4 interacciones especiales de manipulación física, retroalimentación sonora y efectos atmosféricos.
 
-> 🇪🇸 **Versión en Español:** Puedes leer la documentación en español en [README_ES.md](README_ES.md).
-
----
-
-## 1. In-Game Evidence Gallery
-
-The following real-time screenshots from **Unity 6** demonstrate the environment, VR interactors, locomotion mechanics, and interactive elements:
-
-### Zone 1: Entrance, Welcome Board & Collectible Pedestal
-First-person view from the starting platform. Showcases the World Space UI billboard, teletransport instructions, real-time collection counter, and the marble pedestal on the left with the **Golden Solar Orb**.
-
-![Zone 1 - Entrance, UI and Collectible Orb](Screenshots/01_Bienvenida_UI_Definitiva.jpg)
+> 🇬🇧 **English Summary:** An immersive Japanese Zen Garden VR experience built with Unity 6 & URP featuring authentic Kyoto aesthetics, anti-nausea parabolic teleportation, World Space UI, object selection with highlight, physics-based rock arrangement, interactive lanterns, bonsai contemplations, and traditional Tsukubai bamboo water fountains.
 
 ---
 
-### Zone 2 (Interaction 1): Activated Sylvan Crystal
-Shows the user pointing the controller ray at the forest sylvan crystal, triggering high-emission cyan illumination and energy reaction.
+## 1. Zonas del Jardín Zen de Kioto
 
-![Zone 2 - Sylvan Crystal Activated](Screenshots/02_Cristal_Silvano_Interaccion1.jpg)
+El entorno 3D ha sido rediseñado bajo una paleta cromática orgánica y armónica (verde musgo, arena rastrillada beige, madera oscura envejecida, piedra gris de río y toques de rojo bermellón tradicional):
+
+1. **Zona 1: Entrada Tradicional con Torii:**
+   * Majestuoso portal Torii rojo bermellón con vigas Kasagi y Nuki.
+   * Flanqueado por faroles de piedra Tōrō de bienvenida y sendero central de losas de piedra.
+2. **Zona 2: Jardín de Arena Karesansui (Jardín Seco):**
+   * Delimitado con marco de madera oscura tradicional.
+   * Cama de arena con surcos concéntricos rastrillados.
+   * Disposición de rocas maestras *Sanzon Iwagumi* (tres piedras en equilibrio cósmico).
+   * **Interacción Especial 1:** Piedra sagrada manipulable con agarre físico (`XRGrabInteractable`) y acople armónico al círculo sagrado de contemplación.
+3. **Zona 3: Pabellón de Bonsái Centenario:**
+   * Plataforma de madera con mesa de exposición y maceta de cerámica.
+   * **Interacción Especial 2:** Bonsái de flor de cerezo (Sakura) con tronco retorcido y lluvia de pétalos rosados al interactuar.
+4. **Zona 4: Avenida de Faroles Tōrō:**
+   * Cuatro faroles tradicionales tallados en piedra de Kioto distribuidos por el jardín.
+   * **Interacción Especial 3:** Farol Tōrō interactivo que permite encender y apagar la llama cálida interior (`Light` de punto cálido y núcleo emisivo).
+5. **Zona 5: Estanque de Piedras y Fuente Tsukubai (Shishi-odoshi):**
+   * Estanque con agua translúcida y reflexiones en tiempo real.
+   * Borde perimetral delimitado con rocas naturales.
+   * **Interacción Especial 4:** Pileta ritual de piedra con caña de bambú basculante que activa y detiene el flujo de agua y su audio relajante.
+6. **Zona 6: Pabellón de Contemplación y Té:**
+   * Plataforma elevada con escalones transitables por teletransporte.
+   * Columnas de madera, tejado pagoda tradicional, bancos de contemplación y mesa ceremonial con cuenco de té.
+7. **Vegetación Perimetral:**
+   * Bosque de cañas de bambú natural y árboles de Sakura en floración completa.
 
 ---
 
-### Zone 2 (Interaction 2): Levitating Ancient Runestone
-Shows the ancient runestone after selection: it rises smoothly from the ground, maintaining a continuous levitation loop and bright radiant emission.
+## 2. Sistema de Interacciones VR (4 Mecánicas Implementadas)
 
-![Zone 2 - Runestone in Levitation](Screenshots/03_Piedra_Runica_Levitando.jpg)
+Todas las interacciones cuentan con **resaltado visual al apuntar (`ObjectHighlight.cs`)**, **inspección con ficha descriptiva en la UI (`ObjectSelectionManager.cs`)** y respuesta háptica/sonora:
 
----
-
-### Zone 3: Magic Lake, Waterfall & Boundary Rocks
-Shows the translucent water basin utilizing URP materials, the rocky cliff with a waterfall, and perimeter rocks preventing the user from teleporting into hazardous deep water.
-
-![Zone 3 - Magic Lake and Waterfall](Screenshots/04_Lago_Cascada_Definitiva.jpg)
-
----
-
-### Zone 4 (Interaction 4): Great Magic Sanctuary Awakened
-Shows the activation of the Sanctuary core: selecting the central crystal unleashes a radiant beam, a turquoise altar halo, and all 6 surrounding marble pillars illuminate simultaneously.
-
-![Zone 4 - Sanctuary Awakened](Screenshots/06_Santuario_Despertado_Interaccion4.png)
+| Elemento | Tipo de Interactor | Mecánica e Interacción Especial |
+|---|---|---|
+| **Piedra Zen Sagrada** | Direct & Ray Grab (`XRGrabInteractable`) | Agarre físico con gravedad. Al soltarla dentro del círculo sagrado en la arena, se acopla, emite un destello dorado y actualiza el contador. |
+| **Bonsái de Sakura** | Ray Interactor (`XRSimpleInteractable`) | Al seleccionarse, reproduce sonido de campanilla japonesa, despliega su significado zen y detona una suave cascada de pétalos de cerezo. |
+| **Farol Tōrō** | Ray Interactor (`XRSimpleInteractable`) | Activa y apaga la luz puntual cálida (2.0 lux, tono ámbar) y el fuego interior con sonido de encendido. |
+| **Fuente Tsukubai** | Ray Interactor (`XRSimpleInteractable`) | Abre o cierra el chorro de agua de la caña de bambú y muta el audio relajante del flujo constante. |
 
 ---
 
-## 2. Technical Specifications
+## 3. Navegación VR y Confort Anti-Náuseas
 
-- **Game Engine:** Unity Editor 6000.6.8f1 (Unity 6).
-- **Render Pipeline:** Universal Render Pipeline (URP 17.6.0).
+- **Locomoción Principal:** Teletransporte parabólico instantáneo configurado en 19 zonas y losas (`TeleportationArea`).
+- **Giro Suave vs. Discreto:** Snap Turn angular configurado a 45° para eliminar la cinetosis o sensación de mareo.
+- **Transición y Orientación:** Conservación de la orientación vertical del jugador (`MatchOrientation.WorldSpaceUp`).
+- **Simulador Integrado:** Compatible al 100% con **XR Interaction Simulator** para evaluar directamente en el Editor de Unity usando teclado y ratón.
+
+---
+
+## 4. Interfaz Gráfica en VR (World Space UI)
+
+Tablón de madera natural integrado ergonómicamente en la entrada del jardín:
+- **Título Zen:** "JARDÍN ZEN DE KIOTO".
+- **Objetivo:** Instrucciones de contemplación y serenidad.
+- **Ficha Dinámica del Objeto:** Muestra el nombre, descripción cultural y controles del elemento al que se apunta con el rayo.
+- **Contador de Armonía:** Registra el avance de elementos descubiertos `(0 / 4)`.
+- **Feed de Notificaciones:** Mensajes efímeros que confirman cada interacción realizada.
+
+---
+
+## 5. Especificaciones Técnicas
+
+- **Motor:** Unity 6000.6.8f1 (Unity 6).
+- **Render Pipeline:** Universal Render Pipeline (URP) 17.6.0.
 - **XR Framework:** XR Interaction Toolkit 3.6.1 & XR Core Utils 2.6.0.
-- **XR Plugin Management:** 4.7.0.
-- **VR Backend / Runtime:** OpenXR Plugin 1.18.0.
-- **Input System:** Unity Input System 1.20.1 with Action-Based Controllers.
-- **User Interface:** UGUI 2.6.0 & TextMesh Pro.
+- **XR Provider:** OpenXR Plugin 1.18.0.
+- **Input System:** Unity Input System 1.20.1.
+- **Audio & UI:** UGUI 2.6.0 con TextMesh Pro.
 
 ---
 
-## 3. 3D Environment & Island Zones
-
-The island environment is constructed with optimized URP lit materials, mystical daylighting, and balanced performance:
-
-1. **Zone 1: Island Entrance:**
-   * Circular starting platform with designated teleportation area.
-   * Large physical welcome sign with World Space Canvas.
-   * Marble pedestal holding the first collectible item (Solar Orb).
-2. **Zone 2: Magic Forest:**
-   * Stylized trees with differentiated bark and canopy foliage.
-   * Ancient boulders and glowing bioluminescent mushrooms.
-   * Ambient floating magical spores particle system.
-   * **Interaction 1:** Sylvan Crystal (color shift & audio).
-   * **Interaction 2:** Ancient Runestone (levitation & rotation).
-3. **Zone 3: Magic Lake:**
-   * Translucent water basin with URP depth reflections.
-   * Cliffside waterfall with spray splash effects.
-   * Non-traversable rock perimeter preventing accidental falls.
-4. **Zone 4: Magic Sanctuary:**
-   * Elevated stone base with traversable arcane marble stairs.
-   * 6 runic pillars with responsive light emitters.
-   * Floating orbiting stones.
-   * Central altar holding the **Great Sanctuary Crystal (Interaction 4)**.
-
----
-
-## 4. Locomotion & Anti-Motion Sickness Comfort System
-
-Locomotion design strictly complies with VR accessibility and motion sickness mitigation standards:
-
-- **Mechanism:** Instant parabolic ray teleportation (`TeleportationArea`).
-- **Reticle:** Visual ground marker signaling valid and invalid landing spots.
-- **Orientation:** Head orientation preservation upon landing (`MatchOrientation.WorldSpaceUp`).
-- **Turning:** Discrete 45° Snap Turn to eliminate smooth rotation-induced dizziness.
-- **Continuous Locomotion:** Disabled by default to prioritize comfort.
-- **Vignetting:** Integrated `TunnelingVignette` for visual peripheral dimming during rapid turns.
-
----
-
-## 5. Interaction Systems (4 Distinct Interactions)
-
-1. **Magical Crystals (`CrystalInteraction.cs`):**
-   * Ray/far selection trigger.
-   * Instant color transition with HDR emissive material, point light activation, 3D spatial audio, and UI prompt feed update.
-2. **Ancient Runestone (`MagicStoneInteraction.cs`):**
-   * Upon ray selection, runic etchings ignite in radiant purple.
-   * Triggers a smooth levitation sequence and continuous gentle rotation.
-   * Emits magical dust and sound effects.
-3. **Collectible Relic (`CollectibleItem.cs` & `CollectibleManager.cs`):**
-   * Configured with `XRGrabInteractable` and `Rigidbody` physics.
-   * Grabbed using controller grip button.
-   * Triggers a golden flash pulse, play audio, and updates the global collection progress counter `(X / 3)`.
-4. **Sanctuary Awakening (`SanctuaryController.cs`):**
-   * Interacting with the Great Central Crystal triggers a multi-stage energy surge.
-   * Central light column fires up, all 6 surrounding pillars light up, magical particle bursts trigger, and the main UI board proclaims: **"ISLAND EXPLORATION COMPLETED!"**.
-
----
-
-## 6. User Interface (World Space UI)
-
-The user interface is embedded directly into the 3D environment (`VRUIController.cs`) on a rustic stone billboard:
-- **Title:** "BIENVENIDO A LA ISLA MÁGICA / WELCOME".
-- **Mission brief:** Exploration goals.
-- **Controls guide:** Clear teleport and interaction mappings.
-- **Live Counter:** Magic objects gathered `(0/3, 1/3, 2/3, 3/3)`.
-- **Progress indicator:** Textual percentage completion.
-- **Dynamic notification feed:** Real-time feedback for every triggered event.
-
----
-
-## 7. Project Structure
+## 6. Estructura del Proyecto
 
 ```
 Assets/
   Scenes/
-    MainVRScene.unity         <-- MAIN EVALUATION SCENE
-    SampleScene.unity
+    MainVRScene.unity                    <-- ESCENA PRINCIPAL JARDÍN ZEN
+    MainVRScene_MagicalIsland_Backup.unity
   Scripts/
-    VRSetupManager.cs         <-- Runtime VR rig & comfort setup
-    TeleportManager.cs        <-- Teleport areas & ground bounds
-    CrystalInteraction.cs     <-- Interaction 1 (Crystals)
-    MagicStoneInteraction.cs  <-- Interaction 2 (Runestone)
-    CollectibleManager.cs     <-- Score & collection progress
-    CollectibleItem.cs        <-- Interaction 3 (Grab interactable)
-    SanctuaryController.cs    <-- Interaction 4 (Sanctuary core)
-    VRUIController.cs         <-- UI world canvas controller
-  Materials/
-    Environment/              <-- Grass, Paths, Rocks, Marble, Leaves
-    Magical/                  <-- Blue/Gold crystals, Runes, Shrooms
-    Water/                    <-- M_MagicalWater
+    Interactions/
+      ObjectHighlight.cs                 <-- Resaltado visual emisivo al apuntar
+      ObjectSelectionManager.cs          <-- Envío de nombres y fichas descriptivas a la UI
+      ZenStoneInteraction.cs             <-- Agarre físico y acople en círculo de arena
+      BonsaiInteraction.cs               <-- Activación de pétalos y balanceo con brisa
+      LanternInteraction.cs              <-- Encendido y apagado de faroles Tōrō
+      FountainInteraction.cs             <-- Control de chorro y audio de la fuente Tsukubai
+      VRInteractionUI.cs                 <-- Panel World Space informativo
+    Environment/
+      AmbientAudioController.cs          <-- Audio ambiental relajante (agua, brisa)
+      EnvironmentEffects.cs              <-- Movimiento de vegetación y partículas
+      WaterController.cs                 <-- Ondulaciones del estanque de agua
+  Materials/ZenGarden/
+    M_ZenSand.mat                        <-- Arena rastrillada Karesansui
+    M_ZenMoss.mat                        <-- Césped verde musgo tradicional
+    M_ToriiRed.mat                       <-- Bermellón tradicional japonés
+    M_ZenWoodDark.mat                    <-- Madera oscura envejecida
+    M_ZenBamboo.mat                      <-- Bambú natural
+    M_ZenStoneGray.mat                   <-- Piedra gris de Kioto
+    M_SakuraPink.mat                     <-- Pétalos de Sakura
+    M_ZenWaterPond.mat                   <-- Agua translúcida
+    M_ZenLanternFlame.mat                <-- Núcleo de llama cálida
+    M_ZenWhitePebble.mat                 <-- Guijarros blancos de río
   Editor/
-    CreateVRScene.cs          <-- Tools > VR Explorer > Generate Main Scene
-  Audio/
-    Button Pop.wav            <-- 3D Interaction audio
-Screenshots/
-  01_Bienvenida_UI_Definitiva.jpg
-  02_Cristal_Silvano_Interaccion1.jpg
-  03_Piedra_Runica_Levitando.jpg
-  04_Lago_Cascada_Definitiva.jpg
-  06_Santuario_Despertado_Interaccion4.jpg
+    ZenGarden/ZenGardenBuilder.cs        <-- Menú Tools > Zen Garden VR > Transform Scene
 ```
 
 ---
 
-## 8. How to Run & Test
+## 7. Instrucciones de Ejecución
 
-### For Evaluators:
-
-1. **Open the project in Unity Editor 6000.6.8f1 (Unity 6).**
-2. In the **Project** window, navigate to:
-   `Assets/Scenes/MainVRScene.unity` and double-click to open.
-3. To regenerate the scene programmatically at any time:
-   Go to menu **Tools > VR Explorer > Generate Main Scene**.
-4. Connect a VR headset (Meta Quest 2/3/Pro, HTC Vive, Valve Index, or OpenXR headset) via Link, AirLink, or SteamVR.
-5. Press **Play (▶)** in Unity Editor.
-
-### VR Controls:
-- **Teleport:** Point the joystick/trigger at grass or pathway; release to teleport.
-- **Interact / Activate:** Point controller ray at crystals or runestones and pull Trigger or Grip.
-- **Grab Collectible:** Bring hand close to the orb on the pedestal and press Grip.
-- **Snap Turn:** Flick the right joystick left or right for 45° discrete turns.
-
----
-
-## 9. Hardware & Testing Compatibility
-
-- **Supported Headsets:** Meta Quest 2 / 3 / Pro (via Quest Link, AirLink, Virtual Desktop), HTC Vive, Valve Index, Windows Mixed Reality.
-- **Editor Testing without Headset:** Fully supports **XR Device Simulator / XR Interaction Simulator** (preconfigured in the project). Press Play in the Unity Editor to simulate hands and head using keyboard and mouse.
+1. Abrir el proyecto en **Unity 6000.6.8f1**.
+2. En la ventana **Project**, abrir:
+   `Assets/Scenes/MainVRScene.unity`.
+3. Presionar **Play (▶)**:
+   * **Con Visor VR (Meta Quest 2/3/Pro, Vive, Index):** Apuntar con el joystick o gatillo al sendero/arena para teletransportarse; usar Grip para agarrar la piedra Zen y Trigger para interactuar con los faroles, bonsái y fuente.
+   * **Sin Visor (XR Device Simulator):** Usar ratón y teclado mediante el simulador integrado en el proyecto.
