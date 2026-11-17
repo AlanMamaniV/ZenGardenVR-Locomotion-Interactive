@@ -119,7 +119,23 @@ Assets/
 
 ---
 
-## 7. Instrucciones de Ejecución
+## 7. Galería de Capturas de la Experiencia
+
+| 1. Entrada Tradicional con Torii y Tablón | 2. Jardín Seco de Arena Karesansui |
+|:---:|:---:|
+| ![Entrada Torii](Screenshots/01_Entrada_Torii_Bienvenida.jpg) | ![Jardín Karesansui](Screenshots/02_Jardin_Arena_Karesansui.jpg) |
+
+| 3. Contemplación del Bonsái de Sakura | 4. Encendido del Farol de Piedra Tōrō |
+|:---:|:---:|
+| ![Bonsái Sakura](Screenshots/03_Bonsai_Sakura_Contemplacion.jpg) | ![Farol Tōrō](Screenshots/04_Farol_Toro_Encendido.jpg) |
+
+| 5. Pabellón de Té y Contemplación Zen |
+|:---:|
+| ![Pabellón de Contemplación](Screenshots/05_Pabellon_Contemplacion_Zen.jpg) |
+
+---
+
+## 8. Instrucciones de Ejecución
 
 1. Abrir el proyecto en **Unity 6000.6.8f1**.
 2. En la ventana **Project**, abrir:
