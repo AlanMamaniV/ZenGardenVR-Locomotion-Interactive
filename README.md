@@ -1,145 +1,164 @@
 # Zen Garden VR: Japanese Kyoto Experience (Interactive Edition)
 
-Experiencia de Realidad Virtual inmersiva ambientada en un auténtico **Jardín Zen tradicional japonés de Kioto**, desarrollada en **Unity 6 (6000.6.8f1)** utilizando **OpenXR**, **Universal Render Pipeline (URP 17.6.0)** y **XR Interaction Toolkit 3.6.1**.
+[![Unity 6000.6.8f1](https://img.shields.io/badge/Unity-6000.6.8f1-black.svg?style=flat&logo=unity)](https://unity.com/)
+[![URP 17.6.0](https://img.shields.io/badge/Render%20Pipeline-URP%2017.6.0-blue.svg?style=flat)](https://unity.com/srp/Universal-Render-Pipeline)
+[![XRI 3.6.1](https://img.shields.io/badge/XR%20Interaction%20Toolkit-3.6.1-orange.svg?style=flat)](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@3.6/manual/index.html)
+[![OpenXR 1.18.0](https://img.shields.io/badge/OpenXR-1.18.0-purple.svg?style=flat)](https://www.khronos.org/openxr/)
 
-Esta edición expande significativamente el diseño visual, espacial y las mecánicas interactivas del proyecto, combinando elementos arquitectónicos clásicos (Torii, Faroles Tōrō, Shishi-odoshi, Pagoda de Contemplación) con 4 interacciones especiales de manipulación física, retroalimentación sonora y efectos atmosféricos.
+An immersive and contemplative Virtual Reality experience set in an authentic **traditional Japanese Zen Garden inspired by Kyoto's historic temples**, developed in **Unity 6 (6000.6.8f1)** utilizing **Universal Render Pipeline (URP 17.6.0)**, **OpenXR**, and the **XR Interaction Toolkit (XRI 3.6.1)**.
 
-> 🇬🇧 **English Summary:** An immersive Japanese Zen Garden VR experience built with Unity 6 & URP featuring authentic Kyoto aesthetics, anti-nausea parabolic teleportation, World Space UI, object selection with highlight, physics-based rock arrangement, interactive lanterns, bonsai contemplations, and traditional Tsukubai bamboo water fountains.
+This edition substantially enhances visual aesthetics, architectural authenticity, and interactive mechanics, combining classic landscape elements (Torii gate, Tōrō stone lanterns, Karesansui dry raked sand garden, Tsukubai water fountain, cherry blossom bonsai, and contemplation tea pavilion) with 4 custom VR interaction mechanics, emissive visual highlight feedback, and an integrated World Space UI.
 
----
-
-## 1. Zonas del Jardín Zen de Kioto
-
-El entorno 3D ha sido rediseñado bajo una paleta cromática orgánica y armónica (verde musgo, arena rastrillada beige, madera oscura envejecida, piedra gris de río y toques de rojo bermellón tradicional):
-
-1. **Zona 1: Entrada Tradicional con Torii:**
-   * Majestuoso portal Torii rojo bermellón con vigas Kasagi y Nuki.
-   * Flanqueado por faroles de piedra Tōrō de bienvenida y sendero central de losas de piedra.
-2. **Zona 2: Jardín de Arena Karesansui (Jardín Seco):**
-   * Delimitado con marco de madera oscura tradicional.
-   * Cama de arena con surcos concéntricos rastrillados.
-   * Disposición de rocas maestras *Sanzon Iwagumi* (tres piedras en equilibrio cósmico).
-   * **Interacción Especial 1:** Piedra sagrada manipulable con agarre físico (`XRGrabInteractable`) y acople armónico al círculo sagrado de contemplación.
-3. **Zona 3: Pabellón de Bonsái Centenario:**
-   * Plataforma de madera con mesa de exposición y maceta de cerámica.
-   * **Interacción Especial 2:** Bonsái de flor de cerezo (Sakura) con tronco retorcido y lluvia de pétalos rosados al interactuar.
-4. **Zona 4: Avenida de Faroles Tōrō:**
-   * Cuatro faroles tradicionales tallados en piedra de Kioto distribuidos por el jardín.
-   * **Interacción Especial 3:** Farol Tōrō interactivo que permite encender y apagar la llama cálida interior (`Light` de punto cálido y núcleo emisivo).
-5. **Zona 5: Estanque de Piedras y Fuente Tsukubai (Shishi-odoshi):**
-   * Estanque con agua translúcida y reflexiones en tiempo real.
-   * Borde perimetral delimitado con rocas naturales.
-   * **Interacción Especial 4:** Pileta ritual de piedra con caña de bambú basculante que activa y detiene el flujo de agua y su audio relajante.
-6. **Zona 6: Pabellón de Contemplación y Té:**
-   * Plataforma elevada con escalones transitables por teletransporte.
-   * Columnas de madera, tejado pagoda tradicional, bancos de contemplación y mesa ceremonial con cuenco de té.
-7. **Vegetación Perimetral:**
-   * Bosque de cañas de bambú natural y árboles de Sakura en floración completa.
+> 🇪🇸 **Nota en Español:** Para la versión completa de esta documentación en español, consulta [README_ES.md](README_ES.md).
 
 ---
 
-## 2. Sistema de Interacciones VR (4 Mecánicas Implementadas)
+## 1. In-Game Experience Gallery
 
-Todas las interacciones cuentan con **resaltado visual al apuntar (`ObjectHighlight.cs`)**, **inspección con ficha descriptiva en la UI (`ObjectSelectionManager.cs`)** y respuesta háptica/sonora:
+The following screenshots document real-time execution in **Unity 6**, showcasing the visual Kyoto ambiance, comfort locomotion, interactive objects, and World Space interface:
 
-| Elemento | Tipo de Interactor | Mecánica e Interacción Especial |
-|---|---|---|
-| **Piedra Zen Sagrada** | Direct & Ray Grab (`XRGrabInteractable`) | Agarre físico con gravedad. Al soltarla dentro del círculo sagrado en la arena, se acopla, emite un destello dorado y actualiza el contador. |
-| **Bonsái de Sakura** | Ray Interactor (`XRSimpleInteractable`) | Al seleccionarse, reproduce sonido de campanilla japonesa, despliega su significado zen y detona una suave cascada de pétalos de cerezo. |
-| **Farol Tōrō** | Ray Interactor (`XRSimpleInteractable`) | Activa y apaga la luz puntual cálida (2.0 lux, tono ámbar) y el fuego interior con sonido de encendido. |
-| **Fuente Tsukubai** | Ray Interactor (`XRSimpleInteractable`) | Abre o cierra el chorro de agua de la caña de bambú y muta el audio relajante del flujo constante. |
+| 1. Traditional Entrance with Torii Gate & Welcome Board | 2. Karesansui Dry Sand Garden & Master Rocks |
+|:---:|:---:|
+| ![Torii Entrance](Screenshots/01_Entrada_Torii_Bienvenida.jpg) | ![Karesansui Sand Garden](Screenshots/02_Jardin_Arena_Karesansui.jpg) |
 
----
+| 3. Sakura Cherry Blossom Bonsai Pavilion | 4. Illuminated Tōrō Stone Lantern Avenue |
+|:---:|:---:|
+| ![Sakura Bonsai](Screenshots/03_Bonsai_Sakura_Contemplacion.jpg) | ![Tōrō Lantern](Screenshots/04_Farol_Toro_Encendido.jpg) |
 
-## 3. Navegación VR y Confort Anti-Náuseas
-
-- **Locomoción Principal:** Teletransporte parabólico instantáneo configurado en 19 zonas y losas (`TeleportationArea`).
-- **Giro Suave vs. Discreto:** Snap Turn angular configurado a 45° para eliminar la cinetosis o sensación de mareo.
-- **Transición y Orientación:** Conservación de la orientación vertical del jugador (`MatchOrientation.WorldSpaceUp`).
-- **Simulador Integrado:** Compatible al 100% con **XR Interaction Simulator** para evaluar directamente en el Editor de Unity usando teclado y ratón.
+| 5. Zen Contemplation & Tea Ceremony Pavilion |
+|:---:|
+| ![Contemplation Pavilion](Screenshots/05_Pabellon_Contemplacion_Zen.jpg) |
 
 ---
 
-## 4. Interfaz Gráfica en VR (World Space UI)
+## 2. Kyoto Zen Garden Zones
 
-Tablón de madera natural integrado ergonómicamente en la entrada del jardín:
-- **Título Zen:** "JARDÍN ZEN DE KIOTO".
-- **Objetivo:** Instrucciones de contemplación y serenidad.
-- **Ficha Dinámica del Objeto:** Muestra el nombre, descripción cultural y controles del elemento al que se apunta con el rayo.
-- **Contador de Armonía:** Registra el avance de elementos descubiertos `(0 / 4)`.
-- **Feed de Notificaciones:** Mensajes efímeros que confirman cada interacción realizada.
+The 3D environment was designed around an organic, harmonic color palette (moss green, raked beige sand, aged dark timber, Kyoto river stone, and traditional vermilion red accents):
+
+1. **Zone 1: Traditional Torii Entrance:**
+   * Grand Japanese vermilion Torii gate featuring authentic Kasagi and Nuki timber beams.
+   * Central stepping-stone pathway (*Tobi-ishi*) guiding the player smoothly across all garden zones.
+   * Rustic wooden billboard with World Space UI positioned ergonomically beside the gate.
+2. **Zone 2: Karesansui Raked Sand Garden (Dry Landscape):**
+   * Enclosed by dark weathered timber beams.
+   * Sand bed adorned with concentric raked wave ripples.
+   * Three-stone harmonic composition (*Sanzon Iwagumi*).
+   * **Special Interaction 1:** Sacred Zen stone with physical grabbing (`XRGrabInteractable`) and magnetic placement onto the ceremonial sand circle.
+3. **Zone 3: Century-Old Sakura Bonsai Pavilion:**
+   * Elevated timber platform with display table and ceramic tray.
+   * **Special Interaction 2:** Sakura bonsai tree with organic breeze swaying and contemplation trigger.
+4. **Zone 4: Tōrō Stone Lantern Avenue:**
+   * Four classic carved stone lanterns placed purposefully along the walkways.
+   * **Special Interaction 3:** Interactive lantern featuring permanent toggling of warm point illumination and incandescent flame core.
+5. **Zone 5: Tsukubai Water Pond & Fountain (Shishi-odoshi):**
+   * Pond featuring translucent water with real-time reflections under URP.
+   * River stone perimeter boundary preventing accidental locomotion into the water.
+   * **Special Interaction 4:** Ritual bamboo water spigot that toggles water stream flow and relaxing ambient sound.
+6. **Zone 6: Contemplation & Tea Ceremony Pavilion:**
+   * Spacious timber deck under a traditional Japanese pagoda roof.
+   * Low meditation benches and a ceremonial tea bowl on a central cedar table.
+7. **Perimeter Nature & Atmosphere:**
+   * Natural bamboo forest fence and blooming Sakura cherry blossom trees.
 
 ---
 
-## 5. Especificaciones Técnicas
+## 3. VR Interaction System (4 Implemented Mechanics)
 
-- **Motor:** Unity 6000.6.8f1 (Unity 6).
-- **Render Pipeline:** Universal Render Pipeline (URP) 17.6.0.
+All interactive elements feature **visual hover highlighting (`ObjectHighlight.cs`)**, **cultural object inspection cards (`ObjectSelectionManager.cs`)**, and audio feedback:
+
+| Object | XR Component | Interaction Type | Mechanic & In-Game Response |
+|---|---|---|---|
+| **Sacred Zen Stone** | `XRGrabInteractable` | Direct / Ray Grab | Physics-based grab with gravity. Releasing it over the ceremonial sand circle smoothly snaps it into place, plays a harmonic chime, and updates the discovery counter. |
+| **Tōrō Stone Lantern** | `XRSimpleInteractable` | Ray / Direct Trigger | Aiming the ray and pressing the trigger button permanently toggles the warm amber light (2.2 lux) and flame core emission. |
+| **Sakura Bonsai Tree** | `XRSimpleInteractable` | Ray / Direct Trigger | When selected, plays a Japanese meditation chime, triggers organic swaying, and updates the UI with contemplation wisdom. |
+| **Tsukubai Fountain** | `XRSimpleInteractable` | Ray / Direct Trigger | When activated, pivots the bamboo lever and alternates the tranquil water flow. |
+
+---
+
+## 4. VR Locomotion & Comfort (Anti-Nausea)
+
+- **Primary Locomotion:** Parabolic arc teleportation mapped across 19 stepping-stone surfaces and resting decks (`TeleportationArea`).
+- **Discrete Rotation (Snap Turn):** Instantaneous 45-degree angle rotation eliminating motion sickness and vestibular dissonance.
+- **Player Orientation:** Preserves upright vertical camera alignment (`MatchOrientation.WorldSpaceUp`).
+- **XR Interaction Simulator:** 100% pre-configured and operational for immediate testing inside the Unity Editor with keyboard and mouse.
+
+---
+
+## 5. World Space Graphical Interface (VR UI)
+
+A rustic wooden billboard integrated naturally near the Torii entrance without obstructing player navigation:
+- **Zen Header:** "KYOTO ZEN GARDEN".
+- **Mission & Lore:** Meditative guidance for discovering garden elements.
+- **Dynamic Inspection Card:** Shows the target object's title, cultural description, and active controls when hovered.
+- **Harmony Counter:** Live tracking of discovered interactive elements `(0 / 4)`.
+- **Notification Feed:** Fleeting confirmation banners upon completing interactions.
+
+---
+
+## 6. Technical Specifications
+
+- **Game Engine:** Unity Editor 6000.6.8f1 (Unity 6).
+- **Render Pipeline:** Universal Render Pipeline (URP 17.6.0).
 - **XR Framework:** XR Interaction Toolkit 3.6.1 & XR Core Utils 2.6.0.
 - **XR Provider:** OpenXR Plugin 1.18.0.
-- **Input System:** Unity Input System 1.20.1.
-- **Audio & UI:** UGUI 2.6.0 con TextMesh Pro.
+- **Input System:** Unity Input System 1.20.1 (Action-Based Controllers).
+- **UI & Typography:** UGUI 2.6.0 with TextMesh Pro.
 
 ---
 
-## 6. Estructura del Proyecto
+## 7. Project Architecture
 
 ```
 Assets/
   Scenes/
-    MainVRScene.unity                    <-- ESCENA PRINCIPAL JARDÍN ZEN
+    MainVRScene.unity                    <-- PRIMARY KYOTO ZEN GARDEN SCENE
     MainVRScene_MagicalIsland_Backup.unity
   Scripts/
     Interactions/
-      ObjectHighlight.cs                 <-- Resaltado visual emisivo al apuntar
-      ObjectSelectionManager.cs          <-- Envío de nombres y fichas descriptivas a la UI
-      ZenStoneInteraction.cs             <-- Agarre físico y acople en círculo de arena
-      BonsaiInteraction.cs               <-- Activación de pétalos y balanceo con brisa
-      LanternInteraction.cs              <-- Encendido y apagado de faroles Tōrō
-      FountainInteraction.cs             <-- Control de chorro y audio de la fuente Tsukubai
-      VRInteractionUI.cs                 <-- Panel World Space informativo
+      ObjectHighlight.cs                 <-- Emissive material highlight on hover
+      ObjectSelectionManager.cs          <-- Dispatches inspection metadata to UI
+      ZenStoneInteraction.cs             <-- Physical grab and circle snapping
+      BonsaiInteraction.cs               <-- Bonsai contemplation and swaying
+      LanternInteraction.cs              <-- Tōrō lantern light toggling
+      FountainInteraction.cs             <-- Tsukubai bamboo flow control
+      VRInteractionUI.cs                 <-- World Space Canvas UI controller
     Environment/
-      AmbientAudioController.cs          <-- Audio ambiental relajante (agua, brisa)
-      EnvironmentEffects.cs              <-- Movimiento de vegetación y partículas
-      WaterController.cs                 <-- Ondulaciones del estanque de agua
+      AmbientAudioController.cs          <-- Ambient water and breeze audio
+      EnvironmentEffects.cs              <-- Organic foliage swaying
+      WaterController.cs                 <-- Pond surface wave distortion
   Materials/ZenGarden/
-    M_ZenSand.mat                        <-- Arena rastrillada Karesansui
-    M_ZenMoss.mat                        <-- Césped verde musgo tradicional
-    M_ToriiRed.mat                       <-- Bermellón tradicional japonés
-    M_ZenWoodDark.mat                    <-- Madera oscura envejecida
-    M_ZenBamboo.mat                      <-- Bambú natural
-    M_ZenStoneGray.mat                   <-- Piedra gris de Kioto
-    M_SakuraPink.mat                     <-- Pétalos de Sakura
-    M_ZenWaterPond.mat                   <-- Agua translúcida
-    M_ZenLanternFlame.mat                <-- Núcleo de llama cálida
-    M_ZenWhitePebble.mat                 <-- Guijarros blancos de río
+    M_ZenSand.mat                        <-- Karesansui dry raked sand
+    M_ZenMoss.mat                        <-- Traditional Kyoto moss grass
+    M_ToriiRed.mat                       <-- Japanese vermilion lacquer
+    M_ZenWoodDark.mat                    <-- Weathered cedar timber
+    M_ZenBamboo.mat                      <-- Natural green bamboo stems
+    M_ZenStoneGray.mat                   <-- River stone & carved lantern gray
+    M_SakuraPink.mat                     <-- Cherry blossom canopy & petals
+    M_ZenWaterPond.mat                   <-- Translucent pond water
+    M_ZenLanternFlame.mat                <-- Incandescent lantern flame core
+    M_ZenWhitePebble.mat                 <-- White garden pebbles
   Editor/
-    ZenGarden/ZenGardenBuilder.cs        <-- Menú Tools > Zen Garden VR > Transform Scene
+    ZenGarden/ZenGardenBuilder.cs        <-- Procedural scene layout tool
 ```
 
 ---
 
-## 7. Galería de Capturas de la Experiencia
+## 8. Execution Instructions & Controls
 
-| 1. Entrada Tradicional con Torii y Tablón | 2. Jardín Seco de Arena Karesansui |
-|:---:|:---:|
-| ![Entrada Torii](Screenshots/01_Entrada_Torii_Bienvenida.jpg) | ![Jardín Karesansui](Screenshots/02_Jardin_Arena_Karesansui.jpg) |
+1. Open the project in **Unity 6000.6.8f1**.
+2. In the **Project** window, open: `Assets/Scenes/MainVRScene.unity`.
+3. Press **Play (▶)**:
 
-| 3. Contemplación del Bonsái de Sakura | 4. Encendido del Farol de Piedra Tōrō |
-|:---:|:---:|
-| ![Bonsái Sakura](Screenshots/03_Bonsai_Sakura_Contemplacion.jpg) | ![Farol Tōrō](Screenshots/04_Farol_Toro_Encendido.jpg) |
+### With VR Headsets (Meta Quest 2 / 3 / Pro, HTC Vive, Valve Index):
+* **Teleportation:** Push the thumbstick forward to project the parabolic arc onto stones or grass, then release to teleport.
+* **Turn:** Flick the right thumbstick left or right for 45° Snap Turn.
+* **Interact (Lantern / Bonsai / Fountain):** Aim the ray interactor and pull the **Trigger** button.
+* **Grab Zen Stone:** Bring the controller near or ray-target the stone, hold the **Grip** button to lift, move over the sand circle, and release Grip.
 
-| 5. Pabellón de Té y Contemplación Zen |
-|:---:|
-| ![Pabellón de Contemplación](Screenshots/05_Pabellon_Contemplacion_Zen.jpg) |
-
----
-
-## 8. Instrucciones de Ejecución
-
-1. Abrir el proyecto en **Unity 6000.6.8f1**.
-2. En la ventana **Project**, abrir:
-   `Assets/Scenes/MainVRScene.unity`.
-3. Presionar **Play (▶)**:
-   * **Con Visor VR (Meta Quest 2/3/Pro, Vive, Index):** Apuntar con el joystick o gatillo al sendero/arena para teletransportarse; usar Grip para agarrar la piedra Zen y Trigger para interactuar con los faroles, bonsái y fuente.
-   * **Sin Visor (XR Device Simulator):** Usar ratón y teclado mediante el simulador integrado en el proyecto.
+### On PC via XR Interaction Simulator (Keyboard & Mouse):
+* **Look Around:** Hold **Right Mouse Button** and move the mouse.
+* **Teleportation:** Hold the **`B`** key, aim at the pathway or lawn, and Left Click / release `B`.
+* **Rotate View:** Press **`Q`** and **`E`** (45° Snap Turn).
+* **Aim Controller Ray:** Hold **`Left Shift`** and move the mouse to position the simulated controller.
+* **Interact (Trigger):** While aiming with `Left Shift`, **Left Click** on the lantern, bonsai, or fountain.
+* **Grab Zen Stone (Grip):** Aim at the stone with `Left Shift`, hold the **`G`** key to lift it, move over the sand circle, and release `G`.
