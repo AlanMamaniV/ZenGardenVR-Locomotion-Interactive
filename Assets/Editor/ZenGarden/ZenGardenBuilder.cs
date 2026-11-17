@@ -614,7 +614,7 @@ namespace ZenGarden.Editor
             tmp.fontSize = fontSize;
             tmp.alignment = align;
             tmp.color = color;
-            tmp.enableWordWrapping = true;
+            tmp.textWrappingMode = TextWrappingModes.Normal;
             return tmp;
         }
         #endregion
