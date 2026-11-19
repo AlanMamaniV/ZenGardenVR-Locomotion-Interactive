@@ -59,3 +59,10 @@ Thumbs.db
  
 .vscode/
 ZenGardenVR-Locomotion.slnx
+*.zip
+
+# DevEloop large AI runtime binary package (>700MB)
+Assets/DevEloop/
+Assets/DevEloop.meta
+Assets/StreamingAssets/
+Assets/StreamingAssets.meta
