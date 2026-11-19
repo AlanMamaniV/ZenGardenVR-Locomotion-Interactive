@@ -15,6 +15,7 @@ This edition substantially enhances visual aesthetics, architectural authenticit
 
 ## 1. In-Game Experience Gallery
 
+### 1.1 Kyoto Zen Garden & Interactive Elements
 The following screenshots document real-time execution in **Unity 6**, showcasing the visual Kyoto ambiance, comfort locomotion, interactive objects, and World Space interface:
 
 | 1. Traditional Entrance with Torii Gate & Welcome Board | 2. Karesansui Dry Sand Garden & Master Rocks |
@@ -28,6 +29,17 @@ The following screenshots document real-time execution in **Unity 6**, showcasin
 | 5. Zen Contemplation & Tea Ceremony Pavilion |
 |:---:|
 | ![Contemplation Pavilion](Screenshots/05_Pabellon_Contemplacion_Zen.jpg) |
+
+### 1.2 Virtual Character: Zen Guardian (Body & Facial Gaze Animation)
+The contemplation pavilion hosts the autonomous virtual human character ("The Zen Guardian"):
+
+| 1. Welcoming Waving Gesture (`Waving_Greeting`) | 2. Respect Bow / Head Nod upon Lantern Light (`HeadNod_Respect`) |
+|:---:|:---:|
+| ![Zen Guardian Waving](Screenshots/guardian_waving_greeting.png) | ![Zen Guardian Respect Bow](Screenshots/guardian_lantern_respect_nod.png) |
+
+| 3. Spoken Dialogue & Wisdom Expression (`Talking_Wisdom`) | 4. Real-time Eye Contact & Head Gaze Tracking (`GazeTracking`) |
+|:---:|:---:|
+| ![Zen Guardian Dialogue](Screenshots/guardian_talking_dialog.png) | ![Zen Guardian Eye Contact](Screenshots/guardian_gaze_eye_contact.png) |
 
 ---
 
@@ -75,7 +87,24 @@ All interactive elements feature **visual hover highlighting (`ObjectHighlight.c
 
 ---
 
-## 4. VR Locomotion & Comfort (Anti-Nausea)
+## 4. Virtual Character: The Zen Guardian (Humanoid NPC)
+
+An autonomous virtual human character, **The Zen Guardian (Kachujin)**, resides in the central contemplation tea pavilion overlooking the gardens. Developed to model realistic human-to-human interaction in Virtual Reality, the character features a hybrid animation pipeline:
+
+### 4.1 Hybrid Animation Architecture
+- **Full-Body Skeletal Animation (`AnimatorController`):** Motion-captured animations (`Idle`, `Waving_Greeting`, `HeadNod_Respect`, `Talking_Wisdom`, `ShakingHands_Friendship`).
+- **Real-Time Procedural Gaze & Eye Contact (`ZenGuardianController.cs`):** In `LateUpdate()`, the character tracks the player's VR headset position across a 120° visual cone. Rotations are distributed biomechanically between the neck (35%) and the head (65%), maintaining natural eye contact.
+- **Whole-Body Yaw Tracking:** If the player moves across the garden pathways within 35 meters, the character smoothly rotates its body orientation (`Slerp`) towards the player.
+- **Autonomous Biological Blinking:** Periodic realistic blinking intervals (2.5s to 5.5s) to avoid an uncanny static gaze.
+
+### 4.2 Human-Like Responses to Player Actions
+1. **Welcoming Greeting on Proximity:** When the player approaches within range, the Guardian initiates a friendly wave (`Waving_Greeting`) and opens communication.
+2. **Respect Bow / Head Nod upon Environment Care:** Whenever the player interacts with the garden—lighting any of the Tōrō stone lanterns, placing the sacred balance stone, or contemplating the bonsai—the Guardian turns, performs a respectful head bow (`HeadNod_Respect`), and praises the player's harmony.
+3. **Conversational Wisdom Dialogue:** Pointing the ray at the Guardian and pressing the trigger button triggers spoken wisdom accompanied by expressive hand and torso gestures (`Talking_Wisdom`) and in-world speech bubbles.
+
+---
+
+## 5. VR Locomotion & Comfort (Anti-Nausea)
 
 - **Primary Locomotion:** Parabolic arc teleportation mapped across 19 stepping-stone surfaces and resting decks (`TeleportationArea`).
 - **Discrete Rotation (Snap Turn):** Instantaneous 45-degree angle rotation eliminating motion sickness and vestibular dissonance.
@@ -84,7 +113,7 @@ All interactive elements feature **visual hover highlighting (`ObjectHighlight.c
 
 ---
 
-## 5. World Space Graphical Interface (VR UI)
+## 6. World Space Graphical Interface (VR UI)
 
 A rustic wooden billboard integrated naturally near the Torii entrance without obstructing player navigation:
 - **Zen Header:** "KYOTO ZEN GARDEN".
@@ -95,7 +124,7 @@ A rustic wooden billboard integrated naturally near the Torii entrance without o
 
 ---
 
-## 6. Technical Specifications
+## 7. Technical Specifications
 
 - **Game Engine:** Unity Editor 6000.6.8f1 (Unity 6).
 - **Render Pipeline:** Universal Render Pipeline (URP 17.6.0).
@@ -106,7 +135,7 @@ A rustic wooden billboard integrated naturally near the Torii entrance without o
 
 ---
 
-## 7. Project Architecture
+## 8. Project Architecture
 
 ```
 Assets/
@@ -143,7 +172,7 @@ Assets/
 
 ---
 
-## 8. Execution Instructions & Controls
+## 9. Execution Instructions & Controls
 
 1. Open the project in **Unity 6000.6.8f1**.
 2. In the **Project** window, open: `Assets/Scenes/MainVRScene.unity`.

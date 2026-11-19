@@ -8,6 +8,7 @@ Esta edición expande significativamente el apartado visual, la composición esp
 
 ## 1. Galería de Capturas de la Experiencia (In-Game)
 
+### 1.1 Entorno del Jardín Zen de Kioto y Elementos Interactivos
 Las siguientes capturas documentan la ejecución en tiempo real en **Unity 6**, demostrando la ambientación visual, el sistema de navegación por teletransporte y las zonas del jardín:
 
 | 1. Entrada Tradicional con Torii y Tablón de Bienvenida | 2. Jardín Seco de Arena Karesansui y Rocas Maestras |
@@ -21,6 +22,17 @@ Las siguientes capturas documentan la ejecución en tiempo real en **Unity 6**, 
 | 5. Pabellón de Té y Zona de Contemplación Zen |
 |:---:|
 | ![Pabellón de Contemplación](Screenshots/05_Pabellon_Contemplacion_Zen.jpg) |
+
+### 1.2 Personaje Virtual: Guardián Zen (Animación Corporal y Seguimiento de Mirada)
+En el pabellón de contemplación reside el personaje virtual autónomo ("El Guardián Zen"):
+
+| 1. Gesto de Saludo Cordial con la Mano (`Waving_Greeting`) | 2. Reverencia de Respeto al Encender el Farol (`HeadNod_Respect`) |
+|:---:|:---:|
+| ![Guardián Zen Saludando](Screenshots/guardian_waving_greeting.png) | ![Guardián Zen Asintiendo](Screenshots/guardian_lantern_respect_nod.png) |
+
+| 3. Diálogo y Gesticulación Expresiva (`Talking_Wisdom`) | 4. Contacto Visual y Seguimiento de Cabeza/Cuello (`GazeTracking`) |
+|:---:|:---:|
+| ![Guardián Zen Hablando](Screenshots/guardian_talking_dialog.png) | ![Guardián Zen Mirada](Screenshots/guardian_gaze_eye_contact.png) |
 
 ---
 
@@ -68,7 +80,24 @@ Todas las interacciones cuentan con **resaltado visual al apuntar (`ObjectHighli
 
 ---
 
-## 4. Navegación en Realidad Virtual y Confort Anti-Náuseas
+## 4. Personaje Virtual: El Guardián Zen (NPC Humanoide)
+
+En el pabellón de té y contemplación reside el personaje virtual autónomo, **El Guardián Zen (Kachujin)**. Desarrollado para modelar una interacción realista humano-virtual en Realidad Virtual, el personaje incorpora un sistema híbrido de animación:
+
+### 4.1 Arquitectura Híbrida de Animación
+- **Animación Esquelética Corporal (`AnimatorController`):** Animaciones corporales completas (`Idle`, `Waving_Greeting`, `HeadNod_Respect`, `Talking_Wisdom`, `ShakingHands_Friendship`).
+- **Seguimiento Procedural de Mirada en Tiempo Real (`ZenGuardianController.cs`):** En `LateUpdate()`, el personaje orienta dinámicamente su cabeza y cuello hacia el visor VR del jugador dentro de un cono de 120°. La rotación se distribuye biomecánicamente entre el cuello (35%) y la cabeza (65%), logrando un contacto visual humano natural.
+- **Rotación Corporal Completa (Yaw):** Si el jugador se desplaza por las sendas del jardín en un radio de hasta 35 metros, el personaje rota suavemente todo su cuerpo hacia la posición del usuario.
+- **Parpadeo Biológico Autónomo:** Ciclos periódicos de parpadeo (entre 2.5s y 5.5s) que evitan la mirada estática artificial.
+
+### 4.2 Respuestas Humanas ante Acciones del Jugador
+1. **Saludo Cordial al Detectar Proximidad:** Al acercarse al pabellón, el Guardián alza la mano saludando (`Waving_Greeting`) y da la bienvenida al viajero.
+2. **Reverencia de Respeto / Asentimiento de Cabeza:** Cada vez que el jugador cuida o armoniza el jardín (encendiendo cualquiera de los faroles de piedra Tōrō, colocando la piedra sagrada o contemplando el bonsái), el Guardián reacciona asintiendo con la cabeza (`HeadNod_Respect`) y agradece tu devoción.
+3. **Diálogo de Sabiduría y Gesticulación Expresiva:** Al apuntar al Guardián con el rayo y pulsar el gatillo, este entabla conversación gesticulando corporalmente con brazos y manos (`Talking_Wisdom`), proyectando reflexiones zen en su burbuja World Space.
+
+---
+
+## 5. Navegación en Realidad Virtual y Confort Anti-Náuseas
 
 - **Locomoción Principal:** Teletransporte parabólico instantáneo configurado en 19 zonas y losas (`TeleportationArea`).
 - **Giro Discreto (Snap Turn):** Rotación angular instantánea fijada a 45° para prevenir la cinetosis y el mareo en VR.
@@ -77,7 +106,7 @@ Todas las interacciones cuentan con **resaltado visual al apuntar (`ObjectHighli
 
 ---
 
-## 5. Interfaz Gráfica en VR (World Space UI)
+## 6. Interfaz Gráfica en VR (World Space UI)
 
 Tablón de madera natural integrado ergonómicamente a la entrada del jardín (sin bloquear el paso bajo el Torii):
 - **Título Zen:** "JARDÍN ZEN DE KIOTO".
@@ -88,7 +117,7 @@ Tablón de madera natural integrado ergonómicamente a la entrada del jardín (s
 
 ---
 
-## 6. Especificaciones Técnicas
+## 7. Especificaciones Técnicas
 
 - **Motor:** Unity 6000.6.8f1 (Unity 6).
 - **Render Pipeline:** Universal Render Pipeline (URP 17.6.0).
